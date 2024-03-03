@@ -36,7 +36,7 @@ export default function Home() {
               Welcome to Anubiz
             </h1>
           </div>
-          <div>
+          <div className="w-full">
             <div className="w-full h-[65%] 2xl:h-[70%] bg-gradient-to-b from-transparent to-white absolute inset-0" />
             <Image
               width={500}
