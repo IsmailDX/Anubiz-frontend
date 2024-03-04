@@ -37,7 +37,9 @@ body {
 
 @layer base{
 
-     
+     .buttonStyles {
+        @apply bg-[#DFA811]/60 h-10 rounded-xl z-10 active:bg-[#DFA811]/80 hover:border-2 border-black transition-all duration-100 ease-out
+     }
 
 }
 

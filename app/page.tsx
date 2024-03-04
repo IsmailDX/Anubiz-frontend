@@ -6,15 +6,35 @@ import logo from "@/public/images/logo.png";
 import Link from "next/link";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+import { useState } from "react";
 
 export default function Home() {
+  const [error, setError] = useState(false);
+
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().min(8).required("password is required"),
   });
 
-  const handleSubmit = () => {
-    console.log("log in");
+  const handleSubmit = async (
+    values: Object,
+    { setSubmitting, resetForm }: any
+  ) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/v1/auth/login",
+        values
+      );
+      console.log("Login successful", response.data);
+      setError(false);
+      resetForm();
+    } catch (error) {
+      console.error("Login failed", error);
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
   return (
     <main>
@@ -51,7 +71,11 @@ export default function Home() {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
-            <Form className="flex flex-col items-center w-full mt-[5%] px-[5%] 2xl:px-[10%] space-y-[1%]">
+            <Form
+              className="flex flex-col items-center w-full mt-[5%] px-[5%] 2xl:px-[10%] space-y-[1%]"
+              aria-autocomplete="none"
+              autoComplete="off"
+            >
               <div className="relative w-full min-w-[200px] h-fit">
                 <Field
                   type="email"
@@ -59,7 +83,6 @@ export default function Home() {
                   name="email"
                   placeholder={" "}
                   required
-                  autoComplete=""
                   className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-[#cca62e]"
                 />
                 <label className="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-500 peer-focus:text-[#cca62e] before:border-blue-gray-200 peer-focus:before:!border-[#cca62e] after:border-blue-gray-200 peer-focus:after:!border-[#cca62e]">
@@ -88,12 +111,11 @@ export default function Home() {
                 </div>
               </div>
 
+              {error && <p>error</p>}
+
               <div className="pt-5 w-full flex flex-col items-center space-y-5">
-                <button
-                  type="submit"
-                  className="w-full bg-[#DFA811]/60 h-10 rounded-xl"
-                >
-                  Log in
+                <button type="submit" className="w-full buttonStyles">
+                  Sign in
                 </button>
                 <p className="pb-5">
                   Don’t have an account?

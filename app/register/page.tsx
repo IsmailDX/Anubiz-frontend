@@ -5,6 +5,7 @@ import pattern from "@/public/images/pattern.png";
 import Link from "next/link";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
 export default function Home() {
   const validationSchema = Yup.object().shape({
@@ -16,8 +17,25 @@ export default function Home() {
       .required("Confirm Password is required"),
   });
 
-  const handleSubmit = (values: any) => {
-    console.log("Form submitted with values:", values);
+  const handleSubmit = async (
+    values: any,
+    { setSubmitting, resetForm }: any
+  ) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/v1/auth/register",
+        values
+      );
+      console.log(
+        `Registered a new User: ${response.data.user.name}`,
+        response.data
+      );
+      resetForm();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setSubmitting(false);
+    }
   };
   return (
     <main>
@@ -124,10 +142,7 @@ export default function Home() {
               </div>
 
               <div className="pt-5 w-full flex flex-col items-center space-y-5 z-10">
-                <button
-                  type="submit"
-                  className="w-full bg-[#DFA811]/60 h-10 rounded-xl"
-                >
+                <button type="submit" className="w-full buttonStyles">
                   Register
                 </button>
                 <p className="pb-5">
