@@ -6,8 +6,14 @@ import Link from "next/link";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { useState } from "react";
+import { MdErrorOutline } from "react-icons/md";
+import { FaRegCircleCheck } from "react-icons/fa6";
 
 export default function Home() {
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().min(3).required("Name is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -30,8 +36,12 @@ export default function Home() {
         `Registered a new User: ${response.data.user.name}`,
         response.data
       );
+      setSuccess(true);
+      setError(false);
       resetForm();
     } catch (error) {
+      setError(true);
+      setSuccess(false);
       console.error(error);
     } finally {
       setSubmitting(false);
@@ -140,7 +150,20 @@ export default function Home() {
                   <ErrorMessage name="confirmPassword" />
                 </div>
               </div>
-
+              {error && (
+                <div className="w-full bg-red-200 border-2 border-red-300 rounded-lg flex justify-center items-center gap-2 px-2">
+                  <MdErrorOutline className="w-7 h-7" />
+                  <p className="text-sm w-full">Email already taken.</p>
+                </div>
+              )}
+              {success && (
+                <div className="w-full bg-green-200 border-2 border-green-300 rounded-lg flex justify-center items-center gap-2 px-2">
+                  <FaRegCircleCheck className="w-6 h-6" />
+                  <p className="text-sm w-full">
+                    Please check your email to verify your account.
+                  </p>
+                </div>
+              )}
               <div className="pt-5 w-full flex flex-col items-center space-y-5 z-10">
                 <button type="submit" className="w-full buttonStyles">
                   Register

@@ -11,7 +11,7 @@ import { useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
 
 export default function Home() {
-  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -28,11 +28,21 @@ export default function Home() {
         values
       );
       console.log("Login successful", response.data);
-      setError(false);
+      setErrorMessage(null);
       resetForm();
-    } catch (error) {
-      console.error("Login failed", error);
-      setError(true);
+    } catch (error: any) {
+      if (error.response.status === 403) {
+        setErrorMessage("emailVerification");
+        console.log("Forbidden: Please verify your email.");
+      } else if (error.response.status === 401) {
+        setErrorMessage("invalidCredentials");
+        console.log("Unauthorized: Please log in to register.");
+      } else {
+        console.error(
+          "An error occurred:",
+          error.response?.data?.message || error.message
+        );
+      }
     } finally {
       setSubmitting(false);
     }
@@ -102,6 +112,12 @@ export default function Home() {
                   placeholder=" "
                   required
                   autoComplete="new-password"
+                  validate={(value: any) => {
+                    if (/[';\\]/.test(value)) {
+                      return "Password contains invalid characters";
+                    }
+                    return undefined;
+                  }}
                   className="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-[#cca62e] focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                 />
                 <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-[#cca62e] peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-[#cca62e] peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-[#cca62e] peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
@@ -112,7 +128,17 @@ export default function Home() {
                 </div>
               </div>
 
-              {error && (
+              {errorMessage === "emailVerification" && (
+                <div className="w-full bg-red-200 border-2 border-red-300 rounded-lg flex justify-center items-center gap-2 px-2">
+                  <MdErrorOutline className="w-7 h-7" />
+                  <p className="text-sm w-full">
+                    Kindly complete the email verification process by opening
+                    your email inbox and confirming your account.
+                  </p>
+                </div>
+              )}
+
+              {errorMessage === "invalidCredentials" && (
                 <div className="w-full bg-red-200 border-2 border-red-300 rounded-lg flex justify-center items-center gap-2 px-2">
                   <MdErrorOutline className="w-7 h-7" />
                   <p className="text-sm w-full">
