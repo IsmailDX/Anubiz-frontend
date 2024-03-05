@@ -8,6 +8,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useState } from "react";
+import { MdErrorOutline } from "react-icons/md";
 
 export default function Home() {
   const [error, setError] = useState(false);
@@ -111,7 +112,15 @@ export default function Home() {
                 </div>
               </div>
 
-              {error && <p>error</p>}
+              {error && (
+                <div className="w-full bg-red-200 border-2 border-red-300 rounded-lg flex justify-center items-center gap-2 px-2">
+                  <MdErrorOutline className="w-7 h-7" />
+                  <p className="text-sm w-full">
+                    Your credentials are invalid. Please verify your username
+                    and password.
+                  </p>
+                </div>
+              )}
 
               <div className="pt-5 w-full flex flex-col items-center space-y-5">
                 <button type="submit" className="w-full buttonStyles">
