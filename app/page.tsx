@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
+import googleIcon from "../public/images/google-icon.png";
 
 export default function Home() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -24,7 +25,7 @@ export default function Home() {
   ) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/auth/login",
+        "http://localhost:3000/auth/api/v1/login",
         values
       );
       console.log("Login successful", response.data);
@@ -47,6 +48,7 @@ export default function Home() {
       setSubmitting(false);
     }
   };
+
   return (
     <main>
       <ParticlesBackground />
@@ -148,11 +150,31 @@ export default function Home() {
                 </div>
               )}
 
-              <div className="pt-5 w-full flex flex-col items-center space-y-5">
+              <div className="pt-5 w-full flex flex-col items-center space-y-1">
                 <button type="submit" className="w-full buttonStyles">
                   Sign in
                 </button>
-                <p className="pb-5">
+                <p>or</p>
+                <a
+                  href="http://localhost:3000/auth/google"
+                  className="w-full"
+                  target="_blank"
+                >
+                  <div
+                    className="w-full buttonStyles bg-white border-[1px] border-opacity-40 border-black 
+                  flex justify-center items-center gap-2"
+                  >
+                    <Image
+                      src={googleIcon}
+                      alt={"google-icon"}
+                      width={200}
+                      height={200}
+                      className="w-9 h-full object-contain"
+                    />
+                    <p>Continue with Google</p>
+                  </div>
+                </a>
+                <p className="pb-5 pt-2">
                   Don’t have an account?
                   <span className="underline pl-2 cursor-pointer">
                     <Link href="/register">Sign up</Link>

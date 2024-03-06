@@ -29,7 +29,7 @@ export default function Home() {
   ) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/auth/register",
+        "http://localhost:3000/auth/api/v1/register",
         values
       );
       console.log(
