@@ -11,7 +11,7 @@ import { useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
 import googleIcon from "../public/images/google-icon.png";
 
-export default function Home() {
+export default function SignIn() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const validationSchema = Yup.object().shape({
@@ -128,6 +128,11 @@ export default function Home() {
                 <div className="pt-2 text-red-500 text-xs">
                   <ErrorMessage name="password" />
                 </div>
+                <a href="/forgotPass" target="_blank">
+                  <p className="text-xs text-black/70 hover:text-black transition-all duration-100 ease-in-out w-fit cursor-pointer hover:underline">
+                    Forgot password?
+                  </p>
+                </a>
               </div>
 
               {errorMessage === "emailVerification" && (
