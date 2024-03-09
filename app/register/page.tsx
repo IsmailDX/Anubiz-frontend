@@ -10,7 +10,7 @@ import { useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
 import { FaRegCircleCheck } from "react-icons/fa6";
 
-export default function Register() {
+const Register = () => {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -181,4 +181,6 @@ export default function Register() {
       </div>
     </main>
   );
-}
+};
+
+export default Register;

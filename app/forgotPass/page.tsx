@@ -10,7 +10,7 @@ import { useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
 import { FaRegCircleCheck } from "react-icons/fa6";
 
-export default function ForgotPass() {
+const ForgotPass = () => {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -96,14 +96,16 @@ export default function ForgotPass() {
               {error && (
                 <div className="w-full bg-red-200 border-2 border-red-300 rounded-lg flex justify-center items-center gap-2 p-2 z-10">
                   <MdErrorOutline className="w-7 h-7" />
-                  <p className="text-sm w-full">Email doesnt exist</p>
+                  <p className="text-sm w-full">
+                    The email provided does not exist in our records.
+                  </p>
                 </div>
               )}
               {success && (
                 <div className="w-full bg-green-200 border-2 border-green-300 rounded-lg flex justify-center items-center gap-2 p-2 z-10">
                   <FaRegCircleCheck className="w-6 h-6" />
                   <p className="text-sm w-full">
-                    Send a reset password to that email.
+                    A password reset email has been sent.
                   </p>
                 </div>
               )}
@@ -128,4 +130,6 @@ export default function ForgotPass() {
       </div>
     </main>
   );
-}
+};
+
+export default ForgotPass;

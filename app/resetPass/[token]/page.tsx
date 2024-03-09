@@ -11,7 +11,7 @@ import { MdErrorOutline } from "react-icons/md";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { useParams } from "next/navigation";
 
-export default function ResetPass() {
+const ResetPass = () => {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const params = useParams<{ token: any }>();
@@ -114,13 +114,17 @@ export default function ResetPass() {
               {error && (
                 <div className="w-full bg-red-200 border-2 border-red-300 rounded-lg flex justify-center items-center gap-2 p-2 z-10">
                   <MdErrorOutline className="w-7 h-7" />
-                  <p className="text-sm w-full">Password did not reset.</p>
+                  <p className="text-sm w-full">
+                    The password reset was unsuccessful.
+                  </p>
                 </div>
               )}
               {success && (
                 <div className="w-full bg-green-200 border-2 border-green-300 rounded-lg flex justify-center items-center gap-2 p-2 z-10">
                   <FaRegCircleCheck className="w-6 h-6" />
-                  <p className="text-sm w-full">Password reset successful.</p>
+                  <p className="text-sm w-full">
+                    The password has been successfully reset.
+                  </p>
                 </div>
               )}
               <div className="pt-5 w-full flex flex-col items-center space-y-5 z-10">
@@ -140,4 +144,6 @@ export default function ResetPass() {
       </div>
     </main>
   );
-}
+};
+
+export default ResetPass;

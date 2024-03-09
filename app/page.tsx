@@ -10,9 +10,11 @@ import axios from "axios";
 import { useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
 import googleIcon from "../public/images/google-icon.png";
+import { useRouter } from "next/navigation";
 
-export default function SignIn() {
+const SignIn = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const router = useRouter();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -28,9 +30,12 @@ export default function SignIn() {
         "http://localhost:3000/auth/api/v1/login",
         values
       );
+      const { token } = response.data;
+      localStorage.setItem("token", token);
       console.log("Login successful", response.data);
       setErrorMessage(null);
       resetForm();
+      router.push("/home");
     } catch (error: any) {
       if (error.response.status === 403) {
         setErrorMessage("emailVerification");
@@ -159,6 +164,7 @@ export default function SignIn() {
                 <button type="submit" className="w-full buttonStyles">
                   Sign in
                 </button>
+
                 <p>or</p>
                 <a
                   href="http://localhost:3000/auth/google"
@@ -192,4 +198,6 @@ export default function SignIn() {
       </div>
     </main>
   );
-}
+};
+
+export default SignIn;
