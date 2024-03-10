@@ -10,34 +10,38 @@ const Home = () => {
   useEffect(() => {
     const fetchUsername = async () => {
       try {
-        const token = localStorage.getItem("token");
+        let token = localStorage.getItem("token");
+        let response;
 
         if (!token) {
-          router.push("/errorPage");
-          throw new Error("No token found");
-        }
-
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-
-        const response = await axios.get(
-          "http://localhost:3000/home/allItems",
-          config
-        );
-
-        if (response.status === 200) {
+          // If no token found, assume it's a Google user signing in
+          response = await axios.get("http://localhost:3000/home/allItems", {
+            withCredentials: true,
+          });
+        } else {
+          // If token found, assume it's a normal user signing in
+          const config = {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          };
+          response = await axios.get(
+            "http://localhost:3000/home/allItems",
+            config
+          );
           setUsername(response.data.username);
         }
+
+        setUsername(response.data.user.name);
       } catch (error) {
+        router.push("/errorPage");
         console.error("Error fetching username:", error);
       }
     };
 
     fetchUsername();
   }, []);
+
   return (
     <div>
       {username ? <p>Welcome, {username}</p> : <p>Loading username...</p>}
