@@ -2,9 +2,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import NavbarOne from "@/components/Navbars/NavbarOne";
+import NavbarTwo from "@/components/Navbars/NavbarTwo";
 
 const Home = () => {
-  const [username, setUsername] = useState(null);
+  const [username, setUsername] = useState(String);
   const router = useRouter();
 
   useEffect(() => {
@@ -14,12 +16,10 @@ const Home = () => {
         let response;
 
         if (!token) {
-          // If no token found, assume it's a Google user signing in
           response = await axios.get("http://localhost:3000/home/allItems", {
             withCredentials: true,
           });
         } else {
-          // If token found, assume it's a normal user signing in
           const config = {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -43,8 +43,9 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      {username ? <p>Welcome, {username}</p> : <p>Loading username...</p>}
+    <div className="w-full h-[100dvh] overflow-hidden">
+      <NavbarOne name={username} />
+      <NavbarTwo />
     </div>
   );
 };

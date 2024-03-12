@@ -3,13 +3,21 @@
 @tailwind utilities;
 
 @font-face {
+    font-family: "AmazonEmber-Light";
+    src: url("/fonts/AmazonEmber_Lt.ttf") format("opentype");
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
     font-family: "AmazonEmber-Regular";
     src: url("/fonts/AmazonEmber_Rg.ttf") format("opentype");
     font-weight: 500;
     font-display: swap;
     font-style: normal;
 }
-
+ 
 @font-face {
     font-family: "AmazonEmber-Bold";
     src: url("/fonts/AmazonEmber_Bd.ttf") format("opentype");
