@@ -14,7 +14,7 @@ const NavbarOne = ({ name }: Props) => {
   const [open, setOpen] = useState(false);
   return (
     <div className="w-full bg-[#A4642C] py-1 flex justify-center relative select-none">
-      <div className="w-full flex items-center justify-between px-[2%] gap-5">
+      <div className="w-full flex items-center justify-between px-[2%] gap-5 max-w-[1500px]">
         <div className="flex items-center gap-4 min-w-fit">
           <Image
             src={logo}
