@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
+import { motion } from "framer-motion";
 
 const navList = [
   "Electronics",
@@ -13,6 +14,27 @@ const navList = [
 
 const NavbarTwo = () => {
   const [open, setOpen] = useState(false);
+
+  const itemVariants = {
+    closed: { opacity: 0 },
+    open: { opacity: 1 },
+  };
+
+  const sideVariants = {
+    closed: {
+      transition: {
+        staggerChildren: 0.1,
+        staggerDirection: -1,
+      },
+    },
+    open: {
+      transition: {
+        staggerChildren: 0.1,
+        staggerDirection: 1,
+      },
+    },
+  };
+
   return (
     <div className="w-full h-14 bg-[#965A26] flex justify-center items-center lg:px-[3%] sm:px-3 px-[5%] overflow-hidden select-none">
       <div className="w-full flex justify-center items-center max-w-[1500px]">
@@ -32,15 +54,22 @@ const NavbarTwo = () => {
               <IoIosArrowDown className="mt-1" />
             )}
           </div>
-          {open && (
-            <ul className="absolute top-32 sm:min-w-[190px] sm:w-fit w-[90%]">
-              {navList.map((item, index) => (
-                <li className="bg-[#965A26]/60 hover:bg-[#965A26]/70 p-2 text-white w-full border-b-[1px] border-white/20 cursor-pointer">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          )}
+          <motion.ul
+            className="absolute top-32 sm:min-w-[190px] sm:w-fit w-[90%]"
+            variants={sideVariants}
+            initial="closed"
+            animate={open ? "open" : "closed"}
+          >
+            {navList.map((item, index) => (
+              <motion.li
+                key={index}
+                variants={itemVariants}
+                className="bg-[#965A26]/80 hover:bg-[#965A26]/70 p-2 text-white w-full border-b-[1px] border-white/20 cursor-pointer"
+              >
+                {item}
+              </motion.li>
+            ))}
+          </motion.ul>
         </div>
 
         <ul className="sm:w-full w-0 sm:pl-4 flex justify-around items-center pl-0 gap-2 text-white">

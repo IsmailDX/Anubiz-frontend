@@ -5,6 +5,8 @@ import { CiSearch } from "react-icons/ci";
 import Link from "next/link";
 import { IoCartOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 type Props = {
   name: String;
@@ -12,6 +14,20 @@ type Props = {
 
 const NavbarOne = ({ name }: Props) => {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    try {
+      await axios.get("http://localhost:3000/auth/logout", {
+        withCredentials: true,
+      });
+
+      router.push("http://localhost:3001/");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+    router.push("http://localhost:3001/");
+  };
   return (
     <div className="w-full bg-[#A4642C] py-1 flex justify-center relative select-none">
       <div className="w-full flex items-center justify-between px-[2%] gap-5 max-w-[1500px]">
@@ -37,12 +53,12 @@ const NavbarOne = ({ name }: Props) => {
         <div className="flex gap-2">
           <div className="flex flex-col items-start justify-center md:-space-y-1 text-white md:w-fit md:h-fit md:opacity-100 opacity-0 w-0 h-0">
             <p className="text-sm font-[AmazonEmber-Light] truncate">{`Hello, ${name}`}</p>
-            <Link
-              href=""
-              className="underline md:text-xl text-lg hover:text-gray-300 transition-all duration-100 ease-in-out"
+            <p
+              onClick={handleSignOut}
+              className="underline md:text-xl text-lg hover:text-gray-300 transition-all duration-100 ease-in-out cursor-pointer"
             >
               Signout?
-            </Link>
+            </p>
           </div>
           <div
             className="flex items-end text-white"
@@ -50,11 +66,12 @@ const NavbarOne = ({ name }: Props) => {
           >
             <FaRegUser className="md:w-0 md:h-0 w-9 h-9 pb-1" />
             {open && (
-              <Link href="">
-                <div className="underline md:text-xl text-lg p-1 rounded-lg z-10 bg-gray-400/80 absolute right-8 -bottom-9 md:w-0 md:h-0 md:opacity-0">
-                  Sign out?
-                </div>
-              </Link>
+              <div
+                className="underline md:text-xl text-lg p-1 rounded-lg z-10 bg-gray-400/80 absolute right-8 -bottom-9 md:w-0 md:h-0 md:opacity-0"
+                onClick={handleSignOut}
+              >
+                Sign out?
+              </div>
             )}
           </div>
           <div className="text-white flex items-end">
