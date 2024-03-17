@@ -18,9 +18,7 @@ const NavbarOne = ({ name }: Props) => {
 
   const handleSignOut = async () => {
     try {
-      await axios.get("http://localhost:3000/auth/logout", {
-        withCredentials: true,
-      });
+      await axios.get("http://localhost:3000/auth/logout");
 
       router.push("http://localhost:3001/");
     } catch (error) {
