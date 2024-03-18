@@ -36,15 +36,15 @@ const NavbarTwo = () => {
   };
 
   return (
-    <div className="w-full h-14 bg-[#965A26] flex justify-center items-center lg:px-[3%] sm:px-3 px-[5%] overflow-hidden select-none">
-      <div className="w-full flex justify-center items-center max-w-[1500px]">
-        <div className="sm:w-fit w-full">
+    <div className="w-full h-14 bg-[#965A26] flex justify-center items-center lg:px-[3%] sm:px-3 px-[5%] select-none overflow-y-visible relative">
+      <div className="w-full flex justify-center items-center max-w-[1500px] ">
+        <div className="sm:w-fit w-full z-50 relative">
           <div
-            className="border-2 relative border-white sm:min-w-[190px] w-full text-white py-1 px-3 rounded-xl flex justify-between items-center cursor-pointer
+            className="border-2 border-white sm:min-w-[190px] w-full text-white py-1 px-3 rounded-xl flex justify-between items-center cursor-pointer
            hover:text-gray-300 hover:border-gray-300 transition-all duration-100 ease-in-out"
             onClick={() => setOpen(!open)}
           >
-            <div className="flex items-center gap-2  ">
+            <div className="flex items-center gap-2">
               <RxHamburgerMenu className="w-5 h-5" />
               <p>All Categories</p>
             </div>
@@ -55,7 +55,7 @@ const NavbarTwo = () => {
             )}
           </div>
           <motion.ul
-            className="absolute top-32 sm:min-w-[190px] sm:w-fit w-[90%]"
+            className="sm:min-w-[190px] w-full absolute top-11"
             variants={sideVariants}
             initial="closed"
             animate={open ? "open" : "closed"}
@@ -64,7 +64,9 @@ const NavbarTwo = () => {
               <motion.li
                 key={index}
                 variants={itemVariants}
-                className="bg-[#965A26]/80 hover:bg-[#965A26]/70 p-2 text-white w-full border-b-[1px] border-white/20 cursor-pointer"
+                className={`bg-[#965A26]/80 hover:bg-[#965A26]/70 p-2 text-white w-full border-b-[1px] border-white/20 cursor-pointer ${
+                  !open && "max-sm:hidden"
+                }`}
               >
                 {item}
               </motion.li>
