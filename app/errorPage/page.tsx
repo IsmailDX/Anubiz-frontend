@@ -24,7 +24,8 @@ const ErrorPage = () => {
               alt="logoError"
               width={500}
               height={500}
-              className="w-full md:h-52 h-44 object-contain "
+              className="w-full md:h-52 h-44 object-contain"
+              priority={true}
             />
           </div>
           <div className="text-white flex flex-col space-y-3 w-fit lg:text-left text-center">

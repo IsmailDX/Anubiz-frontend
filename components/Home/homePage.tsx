@@ -135,7 +135,7 @@ const HomePage = () => {
                   clickable: true,
                 }}
                 modules={[FreeMode]}
-                className="mySwiper lg:max-w-[400px] md:max-w-[250px] mt-5"
+                className="mySwiper1 w-full lg:max-w-[400px] md:max-w-[250px] mt-5"
               >
                 {products
                   .filter((product) => product.discount)
@@ -196,7 +196,7 @@ const HomePage = () => {
                     clickable: true,
                   }}
                   modules={[FreeMode]}
-                  className="mySwiper h-fit 2xl:max-w-[250px] max-w-[200px]"
+                  className="mySwiper2 w-full h-fit 2xl:max-w-[250px] max-w-[200px]"
                 >
                   {products
                     .filter((product) => product.category === "clothing")
@@ -277,7 +277,7 @@ const HomePage = () => {
                 clickable: true,
               }}
               modules={[FreeMode]}
-              className="mySwiper max-w-[250px]"
+              className="mySwiper3 w-full max-w-[250px]"
             >
               {products
                 .slice(42)

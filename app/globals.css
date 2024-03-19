@@ -69,7 +69,18 @@ body {
         height: 100%;
         object-fit: cover;
       }
+
+      .mySwiperProduct1 .swiper-slide {
+        border: 2px solid white;
+        border-radius: 7px;
+        opacity: 0.6;
+      }
       
+      .mySwiperProduct1 .swiper-slide-thumb-active {
+        border: 2px solid orange ;
+        border-radius: 7px;
+        opacity: 1;
+      }
 
 }
 

@@ -65,7 +65,7 @@ const NavbarTwo = () => {
                 key={index}
                 variants={itemVariants}
                 className={`bg-[#965A26]/80 hover:bg-[#965A26]/70 p-2 text-white w-full border-b-[1px] border-white/20 cursor-pointer ${
-                  !open && "max-sm:hidden"
+                  !open && "hidden"
                 }`}
               >
                 {item}

@@ -29,18 +29,21 @@ const NavbarOne = ({ name }: Props) => {
   return (
     <div className="w-full bg-[#A4642C] py-1 flex justify-center relative select-none">
       <div className="w-full flex items-center justify-between px-[2%] gap-5 max-w-[1500px]">
-        <div className="flex items-center gap-4 min-w-fit">
-          <Image
-            src={logo}
-            width={50}
-            height={50}
-            alt="logo"
-            className="object-contain"
-          />
-          <h1 className="font-[Posterama-Regular] text-white md:text-2xl text-lg font-semibold truncate flex items-center">
-            Anubiz <span className="md:text-2xl text-[0px] md:pl-2">store</span>
-          </h1>
-        </div>
+        <Link href="http://localhost:3001/home" className="min-w-fit">
+          <div className="flex items-center gap-4">
+            <Image
+              src={logo}
+              width={50}
+              height={50}
+              alt="logo"
+              className="object-contain"
+            />
+            <h1 className="font-[Posterama-Regular] text-white md:text-2xl text-lg font-semibold truncate flex items-center">
+              Anubiz
+              <span className="md:text-2xl text-[0px] md:pl-2">store</span>
+            </h1>
+          </div>
+        </Link>
         <div className="md:w-full w-0 bg-white flex items-center justify-end rounded-md md:py-1 md:px-4">
           <input
             placeholder="Search on Anubiz!"
