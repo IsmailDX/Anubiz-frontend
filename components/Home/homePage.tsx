@@ -46,7 +46,7 @@ const HomePage = () => {
   return (
     <div className="w-full h-fit lg:px-[3%] md:px-3 px-2 py-5 sm:flex justify-center sm:visible hidden select-none">
       <div className="w-full max-w-[1500px] flex flex-col ">
-        <h1 className="text-4xl py-10">Discounts</h1>
+        <h1 className="text-4xl py-10 text-white">Discounts</h1>
         <div className="w-full h-fit flex items-center md:gap-3 gap-2">
           <div className="bg-[#D9D9D9]/40 rounded-2xl w-full h-full gap-2 lg:p-5 p-3 flex flex-col">
             <div className="w-full">

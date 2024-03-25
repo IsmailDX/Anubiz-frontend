@@ -45,7 +45,7 @@ const HomePagePhone = () => {
 
   return (
     <div className="sm:hidden w-full p-5 select-none">
-      <h1 className="text-3xl py-5">Discounts</h1>
+      <h1 className="text-3xl py-5 text-white">Discounts</h1>
       <div className="flex flex-col items-start w-full">
         <div className="w-full h-full gap-2 p-3 flex flex-col">
           <div className="w-full">
@@ -80,20 +80,21 @@ const HomePagePhone = () => {
                     href={`/product/${product._id}`}
                     className="cursor-pointer"
                   >
-                    <div className="h-fit max-w-60 overflow-hidden rounded-2xl flex flex-col items-center">
+                    <div className="h-fit max-w-60 overflow-hidden rounded-xl flex flex-col items-center bg-white">
                       <Image
                         src={product.image[0]}
                         alt={product.name}
                         width={500}
                         height={500}
-                        className="w-full h-32 object-contain rounded-2xl"
+                        className="w-full h-32 object-contain p-2"
                       />
-                      <p className="text-red-500 pt-2">
-                        <span className="text-[10px]">$</span>
-                        {product.price}
-                        <span className="text-red-500 bg-red-200 rounded-md px-1 ml-1">
-                          -{product.discountPercentage}%
-                        </span>
+                      <p className="text-red-500 pt-2 flex flex-col justify-center items-center">
+                        ${product.price}
+                        {product.discountPercentage && (
+                          <span className="text-red-500 bg-red-200 rounded-md w-fit px-1 ml-1">
+                            -{product.discountPercentage}%
+                          </span>
+                        )}
                       </p>
                     </div>
                   </Link>
@@ -139,11 +140,10 @@ const HomePagePhone = () => {
                         height={500}
                         className="w-full h-32 object-contain rounded-2xl"
                       />
-                      <p className="text-red-500 pt-2">
-                        <span className="text-[10px]">$</span>
-                        {product.price}
+                      <p className="text-red-500 pt-2 flex flex-col justify-center items-center">
+                        ${product.price}
                         {product.discountPercentage && (
-                          <span className="text-red-500 bg-red-200 rounded-md px-1 ml-1">
+                          <span className="text-red-500 bg-red-200 rounded-md w-fit px-1 ml-1">
                             -{product.discountPercentage}%
                           </span>
                         )}
@@ -155,7 +155,7 @@ const HomePagePhone = () => {
               .slice(0, 5)}
           </Swiper>
         </div>
-        <div className="w-full h-full gap-2 p-3 flex flex-col">
+        <div className="w-full h-full gap-2 p-3 flex flex-col bg-white">
           <div className="w-full">
             <h2 className="text-2xl font-bold text-red-500">Free shipping</h2>
             <h3 className="pb-2">
@@ -192,11 +192,10 @@ const HomePagePhone = () => {
                         height={500}
                         className="w-full h-32 object-contain rounded-2xl"
                       />
-                      <p className="text-red-500 pt-2">
-                        <span className="text-[10px]">$</span>
-                        {product.price}
+                      <p className="text-red-500 pt-2 flex flex-col justify-center items-center">
+                        ${product.price}
                         {product.discountPercentage && (
-                          <span className="text-red-500 bg-red-200 rounded-md px-1 ml-1">
+                          <span className="text-red-500 bg-red-200 rounded-md w-fit px-1 ml-1">
                             -{product.discountPercentage}%
                           </span>
                         )}
@@ -238,11 +237,10 @@ const HomePagePhone = () => {
                       height={500}
                       className="w-full h-32 object-contain rounded-2xl"
                     />
-                    <p className="text-red-500 pt-2">
-                      <span className="text-[10px]">$</span>
-                      {product.price}
+                    <p className="text-red-500 pt-2 flex flex-col justify-center items-center">
+                      ${product.price}
                       {product.discountPercentage && (
-                        <span className="text-red-500 bg-red-200 rounded-md px-1 ml-1">
+                        <span className="text-red-500 bg-red-200 rounded-md w-fit px-1 ml-1">
                           -{product.discountPercentage}%
                         </span>
                       )}
