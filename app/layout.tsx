@@ -15,7 +15,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className="relative">
-                <ServerAuth>{children}</ServerAuth>
+                {/* <ServerAuth> */}
+                {children}
+                {/* </ServerAuth> */}
             </body>
         </html>
     )
