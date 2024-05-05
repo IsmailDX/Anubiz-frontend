@@ -116,7 +116,7 @@ const SignIn = () => {
                                 </div>
                             </div>
 
-                            <div className="relative h-fit w-full min-w-[200px]">
+                            <div className="relative h-fit w-full min-w-[200px] pb-2">
                                 <Field
                                     type="password"
                                     id="password"
@@ -166,7 +166,7 @@ const SignIn = () => {
                                 </div>
                             )}
 
-                            <div className="pt-5 w-full flex flex-col items-center space-y-1">
+                            <div className="pt-2 w-full flex flex-col items-center space-y-1">
                                 <button
                                     type="submit"
                                     className="w-full buttonStyles"
