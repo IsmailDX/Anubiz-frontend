@@ -9,18 +9,7 @@ import HomePagePhone from '@/components/Home/homePagePhone'
 import wallpaper from '@/public/images/orangeHomeWallpaper.jpg'
 import Image from 'next/image'
 import { useCookies } from 'react-cookie'
-
-type Product = {
-    _id: string
-    name: string
-    price: number
-    image: string[]
-    discount: boolean
-    discountPercentage?: number
-    priceBefore?: number
-    category?: string
-    section?: string
-}
+import { Product } from '@/types'
 
 const Home = () => {
     const [username, setUsername] = useState(String)
@@ -81,8 +70,13 @@ const Home = () => {
                     height={1000}
                     alt="wallpaper"
                     className="w-full h-[1000px] select-none object-cover"
+                    quality={20}
+                    priority={true}
                 />
-                <div className="absolute top-0 left-0 w-full h-[1000px] bg-gradient-to-t from-white via-white/95 to-transparent" />
+                <div
+                    className="absolute top-0 left-0 w-full h-[1000px] bg-gradient-to-t from-white
+                 via-white/95 to-transparent"
+                />
             </div>
 
             <HomePage products={productsData} />

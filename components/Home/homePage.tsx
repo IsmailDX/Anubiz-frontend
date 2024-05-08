@@ -3,18 +3,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import HomePageSwipers from './swipers/homePageSwipers'
-
-type Product = {
-    _id: string
-    name: string
-    price: number
-    image: string[]
-    discount: boolean
-    discountPercentage?: number
-    priceBefore?: number
-    category?: string
-    section?: string
-}
+import { Product } from '@/types'
 
 type Props = {
     products: Product[]

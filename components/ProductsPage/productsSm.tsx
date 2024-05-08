@@ -5,23 +5,12 @@ import { FreeMode, Thumbs } from 'swiper/modules'
 import cashIcon from '@/public/images/deliveryIcon.png'
 import fredeliveryIcon from '@/public/images/freedeliveryIcon.png'
 import returnableIcon from '@/public/images/returnableIcon.png'
+import { Product } from '@/types'
 
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
-
-type Product = {
-    _id: string
-    name: string
-    price: number
-    image: string[]
-    discount: boolean
-    discountPercentage?: number
-    priceBefore?: number
-    category?: string
-    section?: string
-}
 
 const IconObject = [
     {

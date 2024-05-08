@@ -7,18 +7,7 @@ import axios from 'axios'
 import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
-
-type Product = {
-    _id: string
-    name: string
-    price: number
-    image: string[]
-    discount: boolean
-    discountPercentage?: number
-    priceBefore?: number
-    category?: string
-    section?: string
-}
+import { Product } from '@/types'
 
 const ProductPage = () => {
     const params = useParams<{ productID: any }>()
