@@ -82,6 +82,10 @@ body {
         opacity: 1;
       }
 
+      .shape {
+        clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 51%, 0% 0%);
+      }
+
 }
 
  

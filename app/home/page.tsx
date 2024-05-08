@@ -39,7 +39,6 @@ const Home = () => {
                         'http://localhost:3000/home/allProducts',
                         config
                     )
-                    setUsername(response.data.username)
                 }
 
                 setUsername(response.data.user.name)

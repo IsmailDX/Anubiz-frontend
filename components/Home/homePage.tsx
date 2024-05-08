@@ -1,15 +1,10 @@
 'use client'
 import React, { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { FreeMode } from 'swiper/modules'
 import axios from 'axios'
 import { useCookies } from 'react-cookie'
-
-import 'swiper/css'
-import 'swiper/css/free-mode'
-import 'swiper/css/pagination'
 import Link from 'next/link'
+import HomePageSwipers from './swipers/homePageSwipers'
 
 type Product = {
     _id: string
@@ -50,7 +45,6 @@ const HomePage = () => {
                         'http://localhost:3000/home/allProducts',
                         config
                     )
-                    setProductsData(response.data.products)
                 }
 
                 setProductsData(response.data.products)
@@ -93,6 +87,7 @@ const HomePage = () => {
                                     <Link
                                         href={`/product/${product._id}`}
                                         className="cursor-pointer"
+                                        key={product._id}
                                     >
                                         <div className="w-full h-fit lg:max-w-56 max-w-32 overflow-hidden flex flex-col items-center lg:mt-14">
                                             <Image
@@ -126,6 +121,7 @@ const HomePage = () => {
                                     <Link
                                         href={`/product/${product._id}`}
                                         className="cursor-pointer"
+                                        key={product._id}
                                     >
                                         <div className="w-full h-fit max-w-32 overflow-hidden rounded-xl lg:mb-40 flex flex-col items-center">
                                             <Image
@@ -164,56 +160,13 @@ const HomePage = () => {
                                     Free shipping - 10 day delivery
                                 </h3>
                             </div>
-                            <Swiper
+                            <HomePageSwipers
+                                products={products}
                                 slidesPerView={3}
-                                spaceBetween={10}
-                                freeMode={true}
-                                pagination={{
-                                    clickable: true,
-                                }}
-                                modules={[FreeMode]}
-                                className="mySwiper1 w-full lg:max-w-[400px] md:max-w-[250px] mt-5"
-                            >
-                                {products
-                                    .filter((product) => product.discount)
-                                    .map((product) => (
-                                        <SwiperSlide key={product._id}>
-                                            <Link
-                                                href={`/product/${product._id}`}
-                                                className="cursor-pointer"
-                                            >
-                                                <div className="w-full h-fit bg-white p-2 overflow-hidden rounded-2xl flex flex-col items-center">
-                                                    <Image
-                                                        src={product.image[0]}
-                                                        alt={product.name}
-                                                        width={500}
-                                                        height={500}
-                                                        className="w-full h-24 object-contain "
-                                                    />
-                                                </div>
-                                                <p className="text-red-500 pt-2 text-base md:text-sm z-10 flex lg:flex-row flex-col">
-                                                    <span className="text-red-500 lg:text-sm md:text-xs font-[AmazonEmber-Light] rounded-md px-1 ml-1">
-                                                        <span className="text-[10px]">
-                                                            $
-                                                        </span>
-                                                        {product.price}
-                                                    </span>
-                                                    {product.discount && (
-                                                        <span
-                                                            className="text-gray-400 lg:text-sm md:text-xs font-[AmazonEmber-Light] rounded-md px-1 ml-1 line-through
-                           truncate hover:text-clip"
-                                                        >
-                                                            {
-                                                                product.priceBefore
-                                                            }
-                                                        </span>
-                                                    )}
-                                                </p>
-                                            </Link>
-                                        </SwiperSlide>
-                                    ))
-                                    .slice(0, 4)}
-                            </Swiper>
+                                swiperStyle="mySwiper1 w-full lg:max-w-[400px] md:max-w-[250px] mt-5"
+                                filter={(product: Product) => product.discount}
+                                slice={[0, 4]}
+                            />
                         </div>
 
                         <div className="w-full rounded-2xl h-full bg-[#FFB06A]/40 flex lg:flex-row flex-col justify-between px-5 py-5">
@@ -229,61 +182,15 @@ const HomePage = () => {
                                 </h3>
                             </div>
                             <div className="h-full flex items-end">
-                                <Swiper
+                                <HomePageSwipers
+                                    products={products}
                                     slidesPerView={2}
-                                    spaceBetween={10}
-                                    freeMode={true}
-                                    pagination={{
-                                        clickable: true,
-                                    }}
-                                    modules={[FreeMode]}
-                                    className="mySwiper2 w-full h-fit 2xl:max-w-[250px] max-w-[200px]"
-                                >
-                                    {products
-                                        .filter(
-                                            (product) =>
-                                                product.category === 'clothing'
-                                        )
-                                        .slice(4)
-                                        .map((product) => (
-                                            <SwiperSlide key={product._id}>
-                                                <Link
-                                                    href={`/product/${product._id}`}
-                                                    className="cursor-pointer"
-                                                >
-                                                    <div className="w-full h-fit bg-white p-2 overflow-hidden rounded-2xl flex flex-col items-center">
-                                                        <Image
-                                                            src={
-                                                                product.image[0]
-                                                            }
-                                                            alt={product.name}
-                                                            width={500}
-                                                            height={500}
-                                                            className="w-full h-24 object-contain "
-                                                        />
-                                                    </div>
-                                                    <p className="text-red-500 pt-2 text-base md:text-sm z-10 flex lg:flex-row flex-col">
-                                                        <span className="text-red-500 lg:text-sm md:text-xs font-[AmazonEmber-Light] rounded-md px-1 ml-1">
-                                                            <span className="text-[10px]">
-                                                                $
-                                                            </span>
-                                                            {product.price}
-                                                        </span>
-                                                        {product.discount && (
-                                                            <span
-                                                                className="text-gray-400 lg:text-sm md:text-xs font-[AmazonEmber-Light] rounded-md px-1 ml-1 line-through
-                             truncate hover:text-clip"
-                                                            >
-                                                                {
-                                                                    product.priceBefore
-                                                                }
-                                                            </span>
-                                                        )}
-                                                    </p>
-                                                </Link>
-                                            </SwiperSlide>
-                                        ))}
-                                </Swiper>
+                                    swiperStyle="mySwiper2 w-full h-fit 2xl:max-w-[250px] max-w-[200px]"
+                                    filter={(product: Product) =>
+                                        product.category === 'clothing'
+                                    }
+                                    slice={[4, 10]}
+                                />
                             </div>
                         </div>
                     </div>
@@ -303,6 +210,7 @@ const HomePage = () => {
                                 <Link
                                     href={`/product/${product._id}`}
                                     className="cursor-pointer"
+                                    key={product._id}
                                 >
                                     <div className="h-fit w-full overflow-hidden rounded-2xl flex flex-col items-center md:pt-[2%] pt-[10%] pb-[2%]">
                                         <Image
@@ -324,54 +232,13 @@ const HomePage = () => {
                                     </div>
                                 </Link>
                             ))}
-                        <Swiper
+                        <HomePageSwipers
+                            products={products}
                             slidesPerView={2}
-                            spaceBetween={10}
-                            freeMode={true}
-                            pagination={{
-                                clickable: true,
-                            }}
-                            modules={[FreeMode]}
-                            className="mySwiper3 w-full max-w-[250px]"
-                        >
-                            {products
-                                .slice(42)
-                                .map((product) => (
-                                    <SwiperSlide key={product._id}>
-                                        <Link
-                                            href={`/product/${product._id}`}
-                                            className="cursor-pointer"
-                                        >
-                                            <div className="w-full h-fit bg-white p-2 overflow-hidden rounded-2xl flex flex-col items-center">
-                                                <Image
-                                                    src={product.image[0]}
-                                                    alt={product.name}
-                                                    width={500}
-                                                    height={500}
-                                                    className="w-full h-24 object-contain "
-                                                />
-                                            </div>
-                                            <p className="text-red-500 pt-2 text-base md:text-sm z-10 flex lg:flex-row flex-col">
-                                                <span className="text-red-500 lg:text-sm md:text-xs font-[AmazonEmber-Light] rounded-md px-1 ml-1">
-                                                    <span className="text-[10px]">
-                                                        $
-                                                    </span>
-                                                    {product.price}
-                                                </span>
-                                                {product.discount && (
-                                                    <span
-                                                        className="text-gray-400 lg:text-sm md:text-xs font-[AmazonEmber-Light] rounded-md px-1 ml-1 line-through
-                      truncate hover:text-clip"
-                                                    >
-                                                        {product.priceBefore}
-                                                    </span>
-                                                )}
-                                            </p>
-                                        </Link>
-                                    </SwiperSlide>
-                                ))
-                                .slice(0, 4)}
-                        </Swiper>
+                            swiperStyle="mySwiper3 w-full max-w-[250px]"
+                            filter={(product: Product) => product.discount}
+                            slice={[4, 30]}
+                        />
                     </div>
                 </div>
             </div>

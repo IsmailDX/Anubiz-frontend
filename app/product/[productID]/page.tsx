@@ -41,7 +41,6 @@ const ProductPage = () => {
                             withCredentials: true,
                         }
                     )
-                    setProduct(response.data.products)
                 } else {
                     const config = {
                         headers: {
@@ -52,11 +51,10 @@ const ProductPage = () => {
                         'http://localhost:3000/home/allProducts',
                         config
                     )
-                    setUsername(response.data.username)
-                    setProduct(response.data.products)
                 }
 
                 setUsername(response.data.user.name)
+                setProduct(response.data.products)
             } catch (error) {
                 router.push('/errorPage')
                 console.log('Error fetching username:', error)

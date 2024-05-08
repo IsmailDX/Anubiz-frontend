@@ -15,7 +15,10 @@ const Register = () => {
     const [success, setSuccess] = useState(false)
 
     const validationSchema = Yup.object().shape({
-        name: Yup.string().min(3).required('Name is required'),
+        name: Yup.string()
+            .matches(/^[a-zA-Z]*$/, 'Name must contain only letters')
+            .min(3, 'Name must be at least 3 characters')
+            .required('Name is required'),
         email: Yup.string()
             .email('Invalid email')
             .required('Email is required'),
@@ -55,7 +58,7 @@ const Register = () => {
             <div className="h-[100dvh] w-full flex items-center justify-center select-none">
                 <div
                     className="w-full xsm:w-[320px] 2xl:w-[420px] bg-white text-black rounded-xl 
-          overflow-hidden flex flex-col items-center relative mx-[5%] xsm:mx-0"
+                    overflow-hidden flex flex-col items-center relative mx-[5%] xsm:mx-0"
                 >
                     <h1 className="pt-4 font-[Posterama-Regular] font-bold text-xl xsm:text-2xl 2xl:text-3xl absolute top-[3%] z-10">
                         Register

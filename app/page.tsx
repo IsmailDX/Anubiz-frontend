@@ -182,7 +182,7 @@ const SignIn = () => {
                                 >
                                     <div
                                         className="w-full buttonStyles bg-white border-[1px] border-opacity-40 border-black 
-                  flex justify-center items-center gap-2"
+                                        flex justify-center items-center gap-2"
                                     >
                                         <Image
                                             src={googleIcon}
