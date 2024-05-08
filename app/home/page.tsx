@@ -10,8 +10,21 @@ import wallpaper from '@/public/images/orangeHomeWallpaper.jpg'
 import Image from 'next/image'
 import { useCookies } from 'react-cookie'
 
+type Product = {
+    _id: string
+    name: string
+    price: number
+    image: string[]
+    discount: boolean
+    discountPercentage?: number
+    priceBefore?: number
+    category?: string
+    section?: string
+}
+
 const Home = () => {
     const [username, setUsername] = useState(String)
+    const [productsData, setProductsData] = useState<Product[]>([])
     const router = useRouter()
 
     const [cookies] = useCookies(['token'])
@@ -40,7 +53,7 @@ const Home = () => {
                         config
                     )
                 }
-
+                setProductsData(response.data.products)
                 setUsername(response.data.user.name)
             } catch (error) {
                 router.push('/errorPage')
@@ -72,8 +85,8 @@ const Home = () => {
                 <div className="absolute top-0 left-0 w-full h-[1000px] bg-gradient-to-t from-white via-white/95 to-transparent" />
             </div>
 
-            <HomePage />
-            <HomePagePhone />
+            <HomePage products={productsData} />
+            <HomePagePhone products={productsData} />
         </div>
     )
 }

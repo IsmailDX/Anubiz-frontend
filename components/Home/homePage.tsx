@@ -1,8 +1,6 @@
 'use client'
-import React, { useEffect, useMemo, useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
-import axios from 'axios'
-import { useCookies } from 'react-cookie'
 import Link from 'next/link'
 import HomePageSwipers from './swipers/homePageSwipers'
 
@@ -18,46 +16,11 @@ type Product = {
     section?: string
 }
 
-const HomePage = () => {
-    const [productsData, setProductsData] = useState<Product[]>([])
-    const [cookies] = useCookies(['token'])
+type Props = {
+    products: Product[]
+}
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                let token = cookies.token
-                let response
-
-                if (!token) {
-                    response = await axios.get(
-                        'http://localhost:3000/home/allProducts',
-                        {
-                            withCredentials: true,
-                        }
-                    )
-                } else {
-                    const config = {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                    response = await axios.get(
-                        'http://localhost:3000/home/allProducts',
-                        config
-                    )
-                }
-
-                setProductsData(response.data.products)
-            } catch (error) {
-                console.error('Error fetching products:', error)
-            }
-        }
-
-        fetchProducts()
-    }, [])
-
-    const products = useMemo(() => productsData, [productsData])
-
+const HomePage = ({ products }: Props) => {
     return (
         <div className="w-full h-fit lg:px-[3%] md:px-3 px-2 py-5 sm:flex justify-center sm:visible hidden select-none">
             <div className="w-full max-w-[1500px] flex flex-col ">

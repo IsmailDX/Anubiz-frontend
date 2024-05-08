@@ -16,46 +16,11 @@ type Product = {
     section?: string
 }
 
-const HomePagePhone = () => {
-    const [productsData, setProductsData] = useState<Product[]>([])
-    const [cookies] = useCookies(['token'])
+type Props = {
+    products: Product[]
+}
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                let token = cookies.token
-                let response
-
-                if (!token) {
-                    response = await axios.get(
-                        'http://localhost:3000/home/allProducts',
-                        {
-                            withCredentials: true,
-                        }
-                    )
-                } else {
-                    const config = {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                    response = await axios.get(
-                        'http://localhost:3000/home/allProducts',
-                        config
-                    )
-                }
-
-                setProductsData(response.data.products)
-            } catch (error) {
-                console.error('Error fetching products:', error)
-            }
-        }
-
-        fetchProducts()
-    }, [])
-
-    const products = useMemo(() => productsData, [productsData])
-
+const HomePagePhone = ({ products }: Props) => {
     return (
         <div className="sm:hidden w-full p-5 select-none">
             <h1 className="text-3xl py-5 text-white">Discounts</h1>
