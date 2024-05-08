@@ -1,10 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
 //this import is for authentication so if no token, user gets no access instantly
-import ServerAuth from '@/util/ServerAuth'
+import ServerAuth from '@/utils/ServerAuth'
 //the reason why we made this provider is because this layout.tsx is server component and query provider on runs
 //if client component, so we wrap provider client component around children so children can still be serverside component
-import Provider from '@/util/Providers'
+import Provider from '@/utils/Providers'
 
 export const metadata: Metadata = {
     title: 'Anubiz',
@@ -19,7 +19,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className="relative">
-                <Provider>{children}</Provider>
+                <ServerAuth>
+                    <Provider>{children}</Provider>
+                </ServerAuth>
             </body>
         </html>
     )

@@ -19,7 +19,7 @@ const NavbarOne = ({ name }: Props) => {
 
     const handleSignOut = async () => {
         removeCookie('token')
-        router.push('http://localhost:3001/')
+        router.push('/')
     }
 
     return (

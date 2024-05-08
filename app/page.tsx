@@ -174,7 +174,7 @@ const SignIn = () => {
                                     Sign in
                                 </button>
 
-                                <p>or</p>
+                                {/* <p>or</p>
                                 <a
                                     href="http://localhost:3000/auth/google"
                                     className="w-full"
@@ -193,7 +193,7 @@ const SignIn = () => {
                                         />
                                         <p>Continue with Google</p>
                                     </div>
-                                </a>
+                                </a> */}
                                 <p className="pb-5 pt-2">
                                     Don’t have an account?
                                     <span className="underline pl-2 cursor-pointer">

@@ -8,57 +8,34 @@ import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { Product } from '@/types'
+import { useQuery } from '@tanstack/react-query'
+import fetchProducts from '@/utils/api'
+import ErrorPage from '@/app/errorPage/page'
 
 const ProductPage = () => {
     const params = useParams<{ productID: any }>()
-    const [username, setUsername] = useState(String)
-    const [product, setProduct] = useState<Product[]>([])
-    const router = useRouter()
 
     const [cookies] = useCookies(['token'])
 
-    useEffect(() => {
-        const fetchUsername = async () => {
-            try {
-                let token = cookies.token
-                let response
+    const { data, error, isLoading } = useQuery({
+        queryKey: ['products'],
+        queryFn: () => fetchProducts(cookies.token),
+    })
 
-                if (!token) {
-                    response = await axios.get(
-                        'http://localhost:3000/home/allProducts',
-                        {
-                            withCredentials: true,
-                        }
-                    )
-                } else {
-                    const config = {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                    response = await axios.get(
-                        'http://localhost:3000/home/allProducts',
-                        config
-                    )
-                }
+    if (isLoading) {
+        return <p>Loading...</p>
+    }
 
-                setUsername(response.data.user.name)
-                setProduct(response.data.products)
-            } catch (error) {
-                router.push('/errorPage')
-                console.log('Error fetching username:', error)
-            }
-        }
-
-        fetchUsername()
-    }, [])
+    if (error) {
+        return <ErrorPage message={error.message} />
+    }
 
     return (
         <div className="w-full h-[100dvh] overflow-x-hidden">
-            <NavbarOne name={username} />
+            <NavbarOne name={data.user.name} />
             <NavbarTwo />
-            <ProductsLg product={product} params={params} />
-            <ProductsSm product={product} params={params} />
+            <ProductsLg product={data.products} params={params} />
+            <ProductsSm product={data.products} params={params} />
         </div>
     )
 }

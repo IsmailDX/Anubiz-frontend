@@ -1,7 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { useRouter } from 'next/navigation'
+import React from 'react'
 import NavbarOne from '@/components/Navbars/NavbarOne'
 import NavbarTwo from '@/components/Navbars/NavbarTwo'
 import HomePage from '@/components/Home/homePage'
@@ -9,53 +7,29 @@ import HomePagePhone from '@/components/Home/homePagePhone'
 import wallpaper from '@/public/images/orangeHomeWallpaper.jpg'
 import Image from 'next/image'
 import { useCookies } from 'react-cookie'
-import { Product } from '@/types'
+import fetchProducts from '@/utils/api'
+import { useQuery } from '@tanstack/react-query'
+import ErrorPage from '../errorPage/page'
 
 const Home = () => {
-    const [username, setUsername] = useState(String)
-    const [productsData, setProductsData] = useState<Product[]>([])
-    const router = useRouter()
-
     const [cookies] = useCookies(['token'])
 
-    useEffect(() => {
-        const fetchUsername = async () => {
-            try {
-                let token = cookies.token
-                let response
+    const { data, error, isLoading } = useQuery({
+        queryKey: ['products'],
+        queryFn: () => fetchProducts(cookies.token),
+    })
 
-                if (!token) {
-                    response = await axios.get(
-                        'http://localhost:3000/home/allProducts',
-                        {
-                            withCredentials: true,
-                        }
-                    )
-                } else {
-                    const config = {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                    response = await axios.get(
-                        'http://localhost:3000/home/allProducts',
-                        config
-                    )
-                }
-                setProductsData(response.data.products)
-                setUsername(response.data.user.name)
-            } catch (error) {
-                router.push('/errorPage')
-                console.log('Error fetching username:', error)
-            }
-        }
+    if (isLoading) {
+        return <p>Loading...</p>
+    }
 
-        fetchUsername()
-    }, [])
+    if (error) {
+        return <ErrorPage message={error.message} />
+    }
 
     return (
         <div className="w-full h-[100dvh] overflow-x-hidden">
-            <NavbarOne name={username} />
+            <NavbarOne name={data.user.name} />
             <NavbarTwo />
             <div className="w-full h-[30%] xl:h-[20%] relative -z-10">
                 <div className="w-full absolute h-fit text-white text-center pt-[100px]">
@@ -79,8 +53,8 @@ const Home = () => {
                 />
             </div>
 
-            <HomePage products={productsData} />
-            <HomePagePhone products={productsData} />
+            <HomePage products={data.products} />
+            <HomePagePhone products={data.products} />
         </div>
     )
 }
