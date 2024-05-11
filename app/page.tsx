@@ -33,7 +33,8 @@ const SignIn = () => {
         try {
             const response = await axios.post(
                 'http://localhost:3000/auth/api/v1/login',
-                values
+                values,
+                { withCredentials: true }
             )
             const { token } = response.data
             setCookies('token', token)

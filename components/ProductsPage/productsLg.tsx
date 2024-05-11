@@ -5,6 +5,7 @@ import Image from 'next/image'
 import cashIcon from '@/public/images/deliveryIcon.png'
 import fredeliveryIcon from '@/public/images/freedeliveryIcon.png'
 import returnableIcon from '@/public/images/returnableIcon.png'
+import { FaCartPlus } from 'react-icons/fa6'
 import { Product } from '@/types'
 
 import 'swiper/css'
@@ -154,6 +155,14 @@ const ProductsLg = ({ product, params }: Props) => {
                                     </div>
                                 ))}
                             </div>
+                            <button
+                                className="w-full bg-[#A4642C] p-3 text-white rounded-full mt-4 mb-7 flex justify-center
+                             items-center hover:bg-white hover:border-[#A4642C] border-2 hover:text-black transition-all 
+                             duration-150 ease-in-out"
+                            >
+                                Add to Cart
+                                <FaCartPlus className="ml-2" />
+                            </button>
                             <h3 className="text-lg font-bold">
                                 About this item
                             </h3>

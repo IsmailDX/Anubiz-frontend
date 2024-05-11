@@ -19,9 +19,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className="relative">
-                <ServerAuth>
-                    <Provider>{children}</Provider>
-                </ServerAuth>
+                {/* <ServerAuth> */}
+                <Provider>{children}</Provider>
+                {/* </ServerAuth> */}
             </body>
         </html>
     )

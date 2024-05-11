@@ -3,15 +3,12 @@ import NavbarOne from '@/components/Navbars/NavbarOne'
 import NavbarTwo from '@/components/Navbars/NavbarTwo'
 import ProductsLg from '@/components/ProductsPage/productsLg'
 import ProductsSm from '@/components/ProductsPage/productsSm'
-import axios from 'axios'
-import { useParams, useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import { useParams } from 'next/navigation'
+import React from 'react'
 import { useCookies } from 'react-cookie'
-import { Product } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import fetchProducts from '@/utils/api'
 import ErrorPage from '@/app/errorPage/page'
-
 const ProductPage = () => {
     const params = useParams<{ productID: any }>()
 

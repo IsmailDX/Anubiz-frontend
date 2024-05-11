@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode, Thumbs } from 'swiper/modules'
+import { Pagination } from 'swiper/modules'
 import cashIcon from '@/public/images/deliveryIcon.png'
 import fredeliveryIcon from '@/public/images/freedeliveryIcon.png'
 import returnableIcon from '@/public/images/returnableIcon.png'
@@ -11,6 +12,8 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
+import 'swiper/css/pagination'
+import { FaCartPlus } from 'react-icons/fa6'
 
 const IconObject = [
     {
@@ -47,8 +50,11 @@ const ProductsSm = ({ product, params }: Props) => {
                     <Swiper
                         loop={true}
                         spaceBetween={10}
-                        modules={[FreeMode, Thumbs]}
+                        modules={[FreeMode, Thumbs, Pagination]}
                         className="mySwiperProduct2 w-full h-[400px]"
+                        pagination={{
+                            dynamicBullets: true,
+                        }}
                     >
                         {product
                             .filter((item) => item._id === params.productID)
@@ -62,7 +68,7 @@ const ProductsSm = ({ product, params }: Props) => {
                                                 alt={item.name}
                                                 width={500}
                                                 height={500}
-                                                className="w-full h-full object-contain"
+                                                className="w-full h-full object-contain pb-10"
                                             />
                                         </SwiperSlide>
                                     ))}
@@ -120,6 +126,14 @@ const ProductsSm = ({ product, params }: Props) => {
                                     </div>
                                 ))}
                             </div>
+                            <button
+                                className="w-full bg-[#A4642C] p-3 text-white rounded-full mt-4 mb-7 flex justify-center
+                             items-center hover:bg-white hover:border-[#A4642C] border-2 hover:text-black transition-all 
+                             duration-150 ease-in-out"
+                            >
+                                Add to Cart
+                                <FaCartPlus className="ml-2" />
+                            </button>
                             <h3 className="text-lg font-bold">
                                 About this item
                             </h3>

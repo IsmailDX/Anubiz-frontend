@@ -86,6 +86,10 @@ body {
         clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 51%, 0% 0%);
       }
 
+      .mySwiperProduct2 .swiper-pagination-bullet-active {
+        color: #fff;
+        background: #A4642C;
+      }
 }
 
  
