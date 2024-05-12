@@ -10,6 +10,9 @@ type Props = {
 }
 
 const HomePage = ({ products }: Props) => {
+    const formatNumber = (num: number): string => {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
     return (
         <div className="w-full h-fit lg:px-[3%] md:px-3 px-2 py-5 sm:flex justify-center sm:visible hidden select-none">
             <div className="w-full max-w-[1500px] flex flex-col ">
@@ -50,10 +53,22 @@ const HomePage = ({ products }: Props) => {
                                                 className="w-full h-full object-contain rounded-2xl"
                                             />
                                             <p className="text-red-500 pt-2">
-                                                <span className="text-[10px]">
-                                                    $
+                                                <span className="text-[7.5px]">
+                                                    AED
                                                 </span>
-                                                {product.price}
+                                                {typeof product.price ===
+                                                    'number' &&
+                                                !isNaN(product.price) &&
+                                                product.price
+                                                    .toString()
+                                                    .includes('.')
+                                                    ? product.price.toLocaleString(
+                                                          'en-US'
+                                                      )
+                                                    : formatNumber(
+                                                          product.price
+                                                      )}
+
                                                 <span className="text-red-500 bg-red-200 rounded-md px-1 ml-1">
                                                     -
                                                     {product.discountPercentage}
@@ -84,10 +99,21 @@ const HomePage = ({ products }: Props) => {
                                                 className="w-full h-full object-contain rounded-2xl"
                                             />
                                             <p className="text-red-500 pt-2">
-                                                <span className="text-[10px]">
-                                                    $
+                                                <span className="text-[7.5px]">
+                                                    AED
                                                 </span>
-                                                {product.price}
+                                                {typeof product.price ===
+                                                    'number' &&
+                                                !isNaN(product.price) &&
+                                                product.price
+                                                    .toString()
+                                                    .includes('.')
+                                                    ? product.price.toLocaleString(
+                                                          'en-US'
+                                                      )
+                                                    : formatNumber(
+                                                          product.price
+                                                      )}
                                                 <span className="text-red-500 bg-red-200 rounded-md px-1 ml-1">
                                                     -
                                                     {product.discountPercentage}
@@ -173,10 +199,19 @@ const HomePage = ({ products }: Props) => {
                                             className="w-[55%] h-full object-contain rounded-2xl"
                                         />
                                         <p className="text-red-500 pt-2">
-                                            <span className="text-[10px]">
-                                                $
+                                            <span className="text-[7.5px]">
+                                                AED
                                             </span>
-                                            {product.price}
+                                            {typeof product.price ===
+                                                'number' &&
+                                            !isNaN(product.price) &&
+                                            product.price
+                                                .toString()
+                                                .includes('.')
+                                                ? product.price.toLocaleString(
+                                                      'en-US'
+                                                  )
+                                                : formatNumber(product.price)}
                                             <span className="text-gray-400 text-sm font-[AmazonEmber-Light] rounded-md px-1 ml-1 line-through">
                                                 9.38
                                             </span>

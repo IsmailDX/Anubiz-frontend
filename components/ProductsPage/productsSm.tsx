@@ -36,6 +36,11 @@ type Props = {
 }
 
 const ProductsSm = ({ product, params }: Props) => {
+    // Function to format numbers with commas
+    const formatNumber = (num: number): string => {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
+
     return (
         <div className="w-full h-fit flex justify-center md:hidden">
             <div className="w-full h-full flex-col items-center justify-center">
@@ -91,10 +96,12 @@ const ProductsSm = ({ product, params }: Props) => {
                                     </h1>
                                 ) : null}
                                 <h2 className="text-3xl flex justify-start">
-                                    <span className="2xl:text-base lg:text-sm">
-                                        AED
-                                    </span>
-                                    {item.price}
+                                    <span className="text-sm">AED</span>
+                                    {typeof item.price === 'number' &&
+                                    !isNaN(item.price) &&
+                                    item.price.toString().includes('.')
+                                        ? item.price.toLocaleString('en-US')
+                                        : formatNumber(item.price)}
                                 </h2>
                             </div>
                             {item.priceBefore ? (

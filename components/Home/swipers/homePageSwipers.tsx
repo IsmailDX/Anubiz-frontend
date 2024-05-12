@@ -36,6 +36,11 @@ const HomePageSwipers = ({
     filter,
     slice,
 }: SwiperTypes) => {
+    // Function to format numbers with commas
+    const formatNumber = (num: number): string => {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
+
     return (
         <Swiper
             slidesPerView={slidesPerView}
@@ -66,8 +71,12 @@ const HomePageSwipers = ({
                             </div>
                             <p className="text-red-500 pt-2 text-base md:text-sm z-10 flex lg:flex-row flex-col">
                                 <span className="text-red-500 lg:text-sm md:text-xs font-[AmazonEmber-Light] rounded-md px-1 ml-1">
-                                    <span className="text-[10px]">$</span>
-                                    {product.price}
+                                    <span className="text-[7.5px]">AED</span>
+                                    {typeof product.price === 'number' &&
+                                    !isNaN(product.price) &&
+                                    product.price.toString().includes('.')
+                                        ? product.price.toLocaleString('en-US')
+                                        : formatNumber(product.price)}
                                 </span>
                                 {product.discount && (
                                     <span

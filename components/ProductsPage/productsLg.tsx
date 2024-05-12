@@ -38,6 +38,11 @@ const ProductsLg = ({ product, params }: Props) => {
         React.Dispatch<React.SetStateAction<any | null>> | any
     >(null)
 
+    // Function to format numbers with commas
+    const formatNumber = (num: number): string => {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
+
     return (
         <div className="w-full h-fit md:flex justify-center hidden">
             <div className="w-full h-full flex justify-center  max-w-[1500px]">
@@ -123,7 +128,11 @@ const ProductsLg = ({ product, params }: Props) => {
                                     <span className="2xl:text-base lg:text-sm">
                                         AED
                                     </span>
-                                    {item.price}
+                                    {typeof item.price === 'number' &&
+                                    !isNaN(item.price) &&
+                                    item.price.toString().includes('.')
+                                        ? item.price.toLocaleString('en-US')
+                                        : formatNumber(item.price)}
                                 </h2>
                             </div>
                             {item.priceBefore ? (

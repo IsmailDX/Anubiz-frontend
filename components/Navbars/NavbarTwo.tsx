@@ -6,11 +6,26 @@ import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 
 const navList = [
-    'Electronics',
-    'Clothing',
-    'Home & Kitchen',
-    'Fitness & Exercise',
-    'Toys & Games',
+    {
+        name: 'Electronics',
+        link: '/category/electronics',
+    },
+    {
+        name: 'Clothing',
+        link: '/category/clothing',
+    },
+    {
+        name: 'Home & Kitchen',
+        link: '/category/home',
+    },
+    {
+        name: 'Fitness & Exercise',
+        link: '/category/fitness',
+    },
+    {
+        name: 'Toys & Games',
+        link: '/category/toys',
+    },
 ]
 
 const NavbarTwo = () => {
@@ -69,9 +84,9 @@ const NavbarTwo = () => {
                                 className={`bg-[#965A26]/80 hover:bg-[#965A26]/70 p-2 text-white w-full border-b-[1px] border-white/20 cursor-pointer ${
                                     !open && 'hidden'
                                 }`}
-                                onClick={() => router.push(`/category/${item}`)}
+                                onClick={() => router.push(item.link)}
                             >
-                                {item}
+                                {item.name}
                             </motion.li>
                         ))}
                     </motion.ul>
@@ -83,9 +98,9 @@ const NavbarTwo = () => {
                             className="md:text-base sm:text-sm text-[0px] text-center cursor-pointer hover:underline hover:text-gray-300 
           transition-all duration-100 ease-in-out"
                             key={index}
-                            onClick={() => router.push(`/category/${item}`)}
+                            onClick={() => router.push(item.link)}
                         >
-                            {item}
+                            {item.name}
                         </li>
                     ))}
                 </ul>
