@@ -29,18 +29,21 @@ const SideBar = ({
                         text="Test"
                         checked={brand === 'male'}
                         onChange={() => setBrand('male')}
+                        textColor="text-white"
                     />
                     <Checkbox
                         id="default-checkbox2"
                         text="Test"
                         checked={brand === 'female'}
                         onChange={() => setBrand('female')}
+                        textColor="text-white"
                     />
                     <Checkbox
                         id="default-checkbox3"
                         text="Test"
                         checked={brand === 'Alien'}
                         onChange={() => setBrand('Alien')}
+                        textColor="text-white"
                     />
                 </div>
                 <div>
@@ -50,18 +53,21 @@ const SideBar = ({
                         text="All Prices"
                         checked={price === 1}
                         onChange={() => setPrice(1)}
+                        textColor="text-white"
                     />
                     <Checkbox
                         id="default-checkbox2"
                         text="Lowest to Highest"
                         checked={price === 2}
                         onChange={() => setPrice(2)}
+                        textColor="text-white"
                     />
                     <Checkbox
                         id="default-checkbox3"
                         text="Highest to Lowest"
                         checked={price === 3}
                         onChange={() => setPrice(3)}
+                        textColor="text-white"
                     />
                 </div>
                 <div>
@@ -71,18 +77,21 @@ const SideBar = ({
                         text="No Discounts"
                         checked={sale === 'male'}
                         onChange={() => setSale('male')}
+                        textColor="text-white"
                     />
                     <Checkbox
                         id="default-checkbox2"
                         text="Discounts"
                         checked={sale === 'male1'}
                         onChange={() => setSale('male1')}
+                        textColor="text-white"
                     />
                     <Checkbox
                         id="default-checkbox3"
                         text="More than 50% off"
                         checked={sale === 'female'}
                         onChange={() => setSale('female')}
+                        textColor="text-white"
                     />
                 </div>
             </div>

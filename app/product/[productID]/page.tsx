@@ -34,14 +34,14 @@ const ProductPage = () => {
             <NavbarOne name={data.user.name} />
             <NavbarTwo />
             <div className="w-full flex flex-col justify-center items-center">
-                <p
+                <button
                     className="w-full max-w-[1300px] flex items-center gap-2 underline cursor-pointer pt-2
                 hover:no-underline hover:text-[#A4642C]"
                     onClick={() => router.back()}
                 >
                     <IoIosArrowBack />
                     Go Back
-                </p>
+                </button>
                 <ProductsLg product={data.products} params={params} />
                 <ProductsSm product={data.products} params={params} />
             </div>

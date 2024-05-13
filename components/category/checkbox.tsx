@@ -5,9 +5,16 @@ type CheckboxProps = {
     text: string
     checked: boolean
     onChange: () => void
+    textColor?: string
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({ id, text, checked, onChange }) => {
+const Checkbox = ({
+    id,
+    text,
+    checked,
+    onChange,
+    textColor,
+}: CheckboxProps) => {
     return (
         <div className="flex items-center space-x-3 pl-2">
             <input
@@ -19,7 +26,7 @@ const Checkbox: React.FC<CheckboxProps> = ({ id, text, checked, onChange }) => {
             />
             <label
                 htmlFor={id}
-                className="text-white select-none cursor-pointer"
+                className={`${textColor} select-none cursor-pointer`}
             >
                 {text}
             </label>
