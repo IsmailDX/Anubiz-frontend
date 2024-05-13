@@ -44,7 +44,7 @@ const ProductsSm = ({ product, params }: Props) => {
     return (
         <div className="w-full h-fit flex justify-center md:hidden">
             <div className="w-full h-full flex-col items-center justify-center">
-                <div className="w-full h-full px-5 pt-5 flex flex-col justify-center items-start select-none">
+                <div className="w-full h-full px-5 pt-2 flex flex-col justify-center items-start select-none">
                     {product
                         .filter((item) => item._id === params.productID)
                         .map((item) => (

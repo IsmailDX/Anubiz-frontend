@@ -45,8 +45,8 @@ const ProductsLg = ({ product, params }: Props) => {
 
     return (
         <div className="w-full h-fit md:flex justify-center hidden">
-            <div className="w-full h-full flex justify-center  max-w-[1500px]">
-                <div className="w-full h-full p-5 flex items-start select-none">
+            <div className="w-full h-full flex justify-center max-w-[1500px]">
+                <div className="w-full h-full p-3 flex items-start select-none">
                     <Swiper
                         onSwiper={setThumbsSwiper}
                         loop={true}
